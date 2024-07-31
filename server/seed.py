@@ -41,37 +41,26 @@ with app.app_context():
     db.session.add_all([p1, p2])
     db.session.commit()
 
-    
-
     # Many-to-many relationship between employee and meeting
-
-    # Add meetings to an employee
     e1.meetings.append(m1)
-    e2.meetings.append(m2)
-
-    # Add employees to a meeting
+    e1.meetings.append(m2)
+    # Add meetings to an employee
     m2.employees.append(e2)
     m2.employees.append(e3)
     m2.employees.append(e4)
     db.session.commit()
 
     # Many-to-many relationship between employee and project through assignment
-
-    a1 = Assignment(role='Project manager',
-                    start_date=datetime.datetime(2023, 5, 28),
-                    end_date=datetime.datetime(2023, 10, 30),
-                    employee = e1,
-                    project=p1)
+    a1 = Assignment(role='project manager', start_date=datetime.datetime(2023, 5, 28), end_date=datetime.datetime(2023, 10, 30), employee=e1, project=p1)
     a2 = Assignment(role='Flask programmer',
-                    start_date=datetime.datetime(2023, 6, 10),
-                    end_date=datetime.datetime(2023, 10, 1),
-                    employee=e2,
-                    project=p1)
+                start_date=datetime.datetime(2023, 6, 10),
+                end_date=datetime.datetime(2023, 10, 1),
+                employee=e2,
+                project=p1)
     a3 = Assignment(role='Flask programmer',
-                    start_date=datetime.datetime(2023, 11, 1),
-                    end_date=datetime.datetime(2024, 2, 1),
-                    employee=e2,
-                    project=p2)
-
+                start_date=datetime.datetime(2023, 11, 1),
+                end_date=datetime.datetime(2024, 2, 1),
+                employee=e2,
+                project=p2)
     db.session.add_all([a1, a2, a3])
     db.session.commit()
